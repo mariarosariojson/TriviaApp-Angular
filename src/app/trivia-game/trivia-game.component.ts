@@ -14,7 +14,7 @@ export class TriviaGameComponent implements OnInit {
   difficulty: string = '';
   sessionToken: string = '';
   questions: any[] = [];
-  currentQuestionIndex!: number;
+  currentQuestionIndex: number = 0;
   currentQuestion: any = null;
   selectedAnswer: string = '';
   timer: any = null;
@@ -56,13 +56,22 @@ export class TriviaGameComponent implements OnInit {
   }
 
   fetchQuestions() {
-    const url = `https://opentdb.com/api.php?amount=7&category=${this.category}&difficulty=${this.difficulty}&type=multiple&token=${this.sessionToken}`;
+    const url = `https://opentdb.com/api.php?amount=7`;
 
     axios
       .get(url)
       .then((response) => {
         this.questions = response.data.results;
         this.currentQuestion = this.questions[this.currentQuestionIndex];
+        this.currentQuestion.answers = [
+          ...this.currentQuestion.incorrect_answers,
+          this.currentQuestion.correct_answer,
+        ];
+        this.currentQuestion.correctIndex =
+          this.currentQuestion.answers.indexOf(
+            this.currentQuestion.correct_answer
+          );
+        this.currentQuestion.points = 1;
         this.startTimer();
       })
       .catch((error) => {
@@ -96,6 +105,8 @@ export class TriviaGameComponent implements OnInit {
 
   finishGame() {
     clearInterval(this.timer);
-    this.router.navigate(['/results']);
+    this.router.navigate(['/results'], {
+      queryParams: { sessionToken: this.sessionToken },
+    });
   }
 }

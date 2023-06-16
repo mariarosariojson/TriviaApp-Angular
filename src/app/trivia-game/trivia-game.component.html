@@ -4,17 +4,18 @@
   <p>Difficulty: {{ difficulty }}</p>
 
   <div *ngIf="currentQuestion">
+    <p>Points: {{ currentQuestion.points }}</p>
     <h2>Question {{ currentQuestionIndex + 1 }}</h2>
     <p>{{ currentQuestion.question }}</p>
 
     <ul>
       <li *ngFor="let answer of currentQuestion.incorrect_answers">
-        <button
+        <Button
           [disabled]="selectedAnswer !== ''"
           (click)="selectAnswer(answer)"
         >
           {{ answer }}
-        </button>
+        </Button>
       </li>
       <li>
         <button
@@ -31,6 +32,11 @@
     <button (click)="nextQuestion()" [disabled]="selectedAnswer === ''">
       Next
     </button>
+  </div>
+
+  <div *ngIf="selectedAnswer !== ''">
+    <p>Selected Answer: {{ selectedAnswer }}</p>
+    <p>Correct Answer: {{ currentQuestion.correct_answer }}</p>
   </div>
 
   <div *ngIf="!currentQuestion">

@@ -9,6 +9,8 @@ import { TriviaGameComponent } from './trivia-game/trivia-game.component';
 import { TriviaResultsComponent } from './trivia-results/trivia-results.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     TriviaRulesComponent,
     TriviaGameComponent,
     TriviaResultsComponent,
+    WelcomeComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

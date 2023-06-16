@@ -1,9 +1,10 @@
 <h2>Trivia Results</h2>
 
-<div *ngIf="score !== undefined">
-  <p>Your Score: {{ score }} / 7</p>
-  <h3>Correct Answers:</h3>
+<div *ngIf="points !== undefined">
+  <p>Your Score: {{ points }} / 7</p>
+  <h3>Correct Answers:{{ correctAnswers }}</h3>
   <ul>
     <li *ngFor="let answer of correctAnswers">{{ answer }}</li>
   </ul>
+  <Button (click)="backToStart()">Back to Start</Button>
 </div>
