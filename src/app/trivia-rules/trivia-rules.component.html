@@ -1,0 +1,25 @@
+<h2>Trivia Rules</h2>
+<form (ngSubmit)="startGame()">
+  <div>
+    <label for="category">Category:</label>
+    <select
+      id="category"
+      [(ngModel)]="selectedCategory"
+      name="category"
+      required
+    >
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty" class="form-control" [(ngModel)]="selectedDifficulty" name="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+  </div>
+  <button type="submit" (click)="startGame()">Start Game</button>
+</form>

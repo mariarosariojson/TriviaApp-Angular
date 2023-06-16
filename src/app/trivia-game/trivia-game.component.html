@@ -1,0 +1,40 @@
+<div>
+  <h1>Trivia Game</h1>
+  <p>Category: {{ category }}</p>
+  <p>Difficulty: {{ difficulty }}</p>
+
+  <div *ngIf="currentQuestion">
+    <h2>Question {{ currentQuestionIndex + 1 }}</h2>
+    <p>{{ currentQuestion.question }}</p>
+
+    <ul>
+      <li *ngFor="let answer of currentQuestion.incorrect_answers">
+        <button
+          [disabled]="selectedAnswer !== ''"
+          (click)="selectAnswer(answer)"
+        >
+          {{ answer }}
+        </button>
+      </li>
+      <li>
+        <button
+          [disabled]="selectedAnswer !== ''"
+          (click)="selectAnswer(currentQuestion.correct_answer)"
+        >
+          {{ currentQuestion.correct_answer }}
+        </button>
+      </li>
+    </ul>
+
+    <p>Time Remaining: {{ timeRemaining }}</p>
+
+    <button (click)="nextQuestion()" [disabled]="selectedAnswer === ''">
+      Next
+    </button>
+  </div>
+
+  <div *ngIf="!currentQuestion">
+    <p>No more questions.</p>
+    <button (click)="finishGame()">Finish</button>
+  </div>
+</div>
