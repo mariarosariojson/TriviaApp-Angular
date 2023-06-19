@@ -1,46 +1,63 @@
-<div>
-  <h1>Trivia Game</h1>
-  <p>Category: {{ category }}</p>
-  <p>Difficulty: {{ difficulty }}</p>
-
-  <div *ngIf="currentQuestion">
-    <p>Points: {{ currentQuestion.points }}</p>
-    <h2>Question {{ currentQuestionIndex + 1 }}</h2>
-    <p>{{ currentQuestion.question }}</p>
-
-    <ul>
-      <li *ngFor="let answer of currentQuestion.incorrect_answers">
-        <Button
-          [disabled]="selectedAnswer !== ''"
-          (click)="selectAnswer(answer)"
-        >
-          {{ answer }}
-        </Button>
-      </li>
-      <li>
-        <button
-          [disabled]="selectedAnswer !== ''"
-          (click)="selectAnswer(currentQuestion.correct_answer)"
-        >
-          {{ currentQuestion.correct_answer }}
-        </button>
-      </li>
-    </ul>
-
-    <p>Time Remaining: {{ timeRemaining }}</p>
-
-    <button (click)="nextQuestion()" [disabled]="selectedAnswer === ''">
-      Next
-    </button>
+<div class="container">
+  <div>
+    <h1>Trivia Game</h1>
+    <p>Category: {{ category }}</p>
+    <p>Difficulty: {{ difficulty }}</p>
+    <div>
+      <p>Points: {{ currentQuestion.points }}</p>
+      <p>Time Remaining: {{ timeRemaining }}</p>
+    </div>
   </div>
 
-  <div *ngIf="selectedAnswer !== ''">
-    <p>Selected Answer: {{ selectedAnswer }}</p>
-    <p>Correct Answer: {{ currentQuestion.correct_answer }}</p>
+  <div class="card border-dark">
+    <img class="card-img-top" src="holder.js/100px180/" alt="" />
+    <div class="card-body">
+      <div class="card-title" *ngIf="currentQuestion">
+        <h2>Question {{ currentQuestionIndex + 1 }}</h2>
+      </div>
+      <p class="card-text">{{ currentQuestion.question }}</p>
+      <div>
+        <ul>
+          <li
+            *ngFor="let answer of currentQuestion.incorrect_answers"
+            class="mt-2"
+          >
+            <button
+              [disabled]="selectedAnswer !== ''"
+              (click)="selectAnswer(answer)"
+              class="btn btn-outline-secondary"
+            >
+              {{ answer }}
+            </button>
+          </li>
+          <li class="mt-2">
+            <button
+              [disabled]="selectedAnswer !== ''"
+              (click)="selectAnswer(currentQuestion.correct_answer)"
+              class="btn btn-outline-secondary"
+            >
+              {{ currentQuestion.correct_answer }}
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="selectedAnswer !== ''">
+        <p>Your Answer: {{ selectedAnswer }}</p>
+        <p>Correct Answer: {{ currentQuestion.correct_answer }}</p>
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="!currentQuestion">
-    <p>No more questions.</p>
-    <button (click)="finishGame()">Finish</button>
-  </div>
+  <button
+    (click)="nextQuestion()"
+    [disabled]="selectedAnswer === ''"
+    class="mt-4 btn btn-primary"
+  >
+    Next
+  </button>
+</div>
+
+<div *ngIf="!currentQuestion">
+  <p>No more questions.</p>
+  <button (click)="finishGame()" class="btn btn-primary">Finish</button>
 </div>
