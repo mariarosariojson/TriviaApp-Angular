@@ -22,20 +22,25 @@ export class TriviaResultsComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.sessionToken = params['sessionToken'];
-
-      if (this.sessionToken) {
-        this.fetchResults();
-      }
+      this.fetchResults();
     });
   }
 
   fetchResults() {
-    const url = `https://opentdb.com/api_token.php?command=request=${this.sessionToken}`;
-
-    this.http.get<any>(url).subscribe((response) => {
-      this.points = response.correctly_answered;
-      this.correctAnswers = response.correct_answers;
-    });
+    this.http
+      .get<any>(
+        `https://opentdb.com/api.php?amount=10&token=b5ea3369e1698750a9578df33bed156014706e2362cb77f46aafe90c4dec151c`
+      )
+      .toPromise()
+      .then((response) => {
+        this.points = response.results.reduce((total: number, result: any) => {
+          if (result.correct_answer === result.selected_answer) {
+            total += 1;
+            this.correctAnswers.push(result.question);
+          }
+          return total;
+        }, 0);
+      });
   }
 
   backToStart() {

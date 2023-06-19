@@ -1,45 +1,49 @@
-<div class="container">
-  <div>
-    <h1>Trivia Game</h1>
-    <p>Category: {{ category }}</p>
-    <p>Difficulty: {{ difficulty }}</p>
-    <div>
-      <p>Points: {{ currentQuestion.points }}</p>
-      <p>Time Remaining: {{ timeRemaining }}</p>
+<div class="container mt-5 w-75">
+  <div class="container col-md-12 text-center">
+    <h1 class="display-6">Trivia Game</h1>
+    <div class="text-left">
+      <div class="row mt-5">
+        <div class="col">
+          <p>Category: {{ category }}</p>
+        </div>
+        <div class="col">
+          <p>
+            <i class="fa-solid fa-stopwatch fa-beat" style="color: #b84ce7"></i>
+            {{ timeRemaining }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>Difficulty: {{ difficulty }}</p>
+        </div>
+        <div class="col">
+          <p>Points: {{ currentQuestion.points }}</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="card border-dark">
+  <div class="card border-light shadow p-4 mt-5">
     <img class="card-img-top" src="holder.js/100px180/" alt="" />
-    <div class="card-body">
+    <div class="card-body m-4">
       <div class="card-title" *ngIf="currentQuestion">
-        <h2>Question {{ currentQuestionIndex + 1 }}</h2>
+        <h3>Question {{ currentQuestionIndex + 1 }}</h3>
       </div>
       <p class="card-text">{{ currentQuestion.question }}</p>
-      <div>
-        <ul>
-          <li
-            *ngFor="let answer of currentQuestion.incorrect_answers"
-            class="mt-2"
-          >
-            <button
-              [disabled]="selectedAnswer !== ''"
-              (click)="selectAnswer(answer)"
-              class="btn btn-outline-secondary"
-            >
-              {{ answer }}
-            </button>
-          </li>
-          <li class="mt-2">
-            <button
-              [disabled]="selectedAnswer !== ''"
-              (click)="selectAnswer(currentQuestion.correct_answer)"
-              class="btn btn-outline-secondary"
-            >
-              {{ currentQuestion.correct_answer }}
-            </button>
-          </li>
-        </ul>
+      <div class="d-grid gap-3 col-8 mx-auto mt-4">
+        <button
+          *ngFor="let answer of currentQuestion.answers; let i = index"
+          [disabled]="selectedAnswer !== ''"
+          (click)="selectAnswer(answer, i)"
+          [ngClass]="{
+            'btn-light': selectedAnswer !== answer,
+            'btn-success': correctAnswer === answer
+          }"
+          class="btn p-3"
+        >
+          {{ answer }}
+        </button>
       </div>
       <div *ngIf="selectedAnswer !== ''">
         <p>Your Answer: {{ selectedAnswer }}</p>

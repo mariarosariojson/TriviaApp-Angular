@@ -1,6 +1,6 @@
-<div class="container mt-5">
+<div class="container mt-5 w-75">
   <div>
-    <h2 class="display-S fw-bold">Trivia Rules</h2>
+    <h2 class="display-6">Trivia Rules</h2>
     <ol class="mt-3">
       <li>Pick a category</li>
       <li>Pick a difficulty</li>
@@ -12,7 +12,7 @@
     </ol>
     <b>Best of luck!</b>
   </div>
-  <form (ngSubmit)="startGame()" class="mt-5">
+  <form (ngSubmit)="startGame()" class="mt-5 w-50">
     <div>
       <label for="category">Pick your category here,</label>
       <select
@@ -34,6 +34,7 @@
         class="form-control"
         [(ngModel)]="selectedDifficulty"
         name="difficulty"
+        required
       >
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>

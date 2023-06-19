@@ -1,9 +1,9 @@
 <div class="container mt-5 text-center">
-  <h2>Trivia Results</h2>
+  <h2 class="display-6">Your results</h2>
 
   <div *ngIf="points !== undefined">
     <p>Your Score: {{ points }} / 7</p>
-    <h3>Correct Answers:{{ correctAnswers }}</h3>
+    <h4 class="mt-5">Correct Answers:{{ correctAnswers }}</h4>
     <ul>
       <li *ngFor="let answer of correctAnswers">{{ answer }}</li>
     </ul>

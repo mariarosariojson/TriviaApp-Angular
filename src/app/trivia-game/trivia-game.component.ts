@@ -4,13 +4,18 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import axios from 'axios';
 
+interface Category {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-trivia-game',
   templateUrl: './trivia-game.component.html',
   styleUrls: ['./trivia-game.component.css'],
 })
 export class TriviaGameComponent implements OnInit {
-  category: number = 0;
+  category: string = '';
   difficulty: string = '';
   sessionToken: string = '';
   questions: any[] = [];
@@ -19,6 +24,8 @@ export class TriviaGameComponent implements OnInit {
   selectedAnswer: string = '';
   timer: any = null;
   timeRemaining: number = 31;
+  correctAnswer: any;
+  points: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,10 +35,8 @@ export class TriviaGameComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.category = +params['category'];
+      this.category = params['category'];
       this.difficulty = params['difficulty'];
-      this.sessionToken = '';
-
       this.startGame();
     });
   }
@@ -88,14 +93,26 @@ export class TriviaGameComponent implements OnInit {
     }, 1000);
   }
 
-  selectAnswer(answer: string) {
+  selectAnswer(answer: string, index: number) {
     this.selectedAnswer = answer;
+    this.correctAnswer = this.currentQuestion.correct_answer;
+
+    if (index === this.currentQuestion.correctIndex) {
+      this.correctAnswer = answer;
+    }
   }
 
   nextQuestion() {
     this.currentQuestionIndex++;
     if (this.currentQuestionIndex < this.questions.length) {
       this.currentQuestion = this.questions[this.currentQuestionIndex];
+      this.currentQuestion.answers = [
+        ...this.currentQuestion.incorrect_answers,
+        this.currentQuestion.correct_answer,
+      ];
+      this.currentQuestion.correctIndex = this.currentQuestion.answers.indexOf(
+        this.currentQuestion.correct_answer
+      );
       this.selectedAnswer = '';
       this.timeRemaining = 31;
     } else {
@@ -104,6 +121,7 @@ export class TriviaGameComponent implements OnInit {
   }
 
   finishGame() {
+    sessionStorage.setItem('points', this.correctAnswer.toString());
     clearInterval(this.timer);
     this.router.navigate(['/results'], {
       queryParams: { sessionToken: this.sessionToken },
