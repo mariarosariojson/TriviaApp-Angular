@@ -11,9 +11,13 @@
       <li>Click next to go to the next question</li>
       <li>You will have 31 seconds to complete each question</li>
     </ol>
-    <b>GOOD LUCK!</b>
+    <b class="mt-5">You got this!</b>
   </div>
-  <form (ngSubmit)="startGame()" class="mt-5 w-75 text-center">
+  <form
+    (ngSubmit)="startGame()"
+    class="mt-5 w-75 text-center"
+    #gameForm="ngForm"
+  >
     <div>
       <label for="category" class="m-2 form-label"
         >Pick your category here,</label
@@ -23,18 +27,19 @@
         [(ngModel)]="selectedCategory"
         name="category"
         class="form-select"
-        required=""
+        required
+        #categoryInput="ngModel"
       >
-        <option
-          *ngFor="let category of categories"
-          [value]="category.name"
-          selected
-          value=""
-        >
+        <option *ngFor="let category of categories" [value]="category.name">
           {{ category.name }}
         </option>
       </select>
-      <div class="invalid-feedback">Please select a valid state.</div>
+      <div
+        class="invalid-feedback"
+        *ngIf="categoryInput.invalid && categoryInput.touched"
+      >
+        Please select a category.
+      </div>
     </div>
     <div class="form-group mt-4">
       <label for="difficulty" class="m-2"
@@ -45,18 +50,24 @@
         class="form-select"
         [(ngModel)]="selectedDifficulty"
         name="difficulty"
-        required=""
+        required
+        #difficultyInput="ngModel"
       >
-        <option selected value="Easy">Easy</option>
-        <option selected value="Medium">Medium</option>
-        <option selected value="Hard">Hard</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
       </select>
-      <div class="invalid-feedback">Please select a valid state.</div>
+      <div
+        class="invalid-feedback"
+        *ngIf="difficultyInput.invalid && difficultyInput.touched"
+      >
+        Please select a difficulty.
+      </div>
     </div>
     <div class="mt-4">
       <button
         type="submit"
-        (click)="startGame()"
+        [disabled]="gameForm.invalid"
         class="btn btn-secondary btn-trivia btn-lg"
       >
         Start Game

@@ -4,12 +4,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
 }
-
 .btn-trivia {
   background-color: blueviolet;
   text-transform: uppercase;
@@ -22,4 +20,5 @@ body {
 .btn-trivia:hover {
   background-color: #572c83;
   border: none;
+  color: #f9f9f9;
 }

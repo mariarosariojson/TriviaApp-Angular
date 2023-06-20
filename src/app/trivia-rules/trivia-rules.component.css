@@ -15,3 +15,7 @@
   font-size: 3rem;
   color: rgb(75, 75, 75);
 }
+select {
+    border-radius: 2rem;
+    padding: 0.6rem  1.2rem;
+}
