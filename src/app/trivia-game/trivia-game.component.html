@@ -1,12 +1,12 @@
 <div class="container mt-5 w-75">
-  <div class="container col-md-12 text-center">
+  <div class="container col-md-12 text-left">
     <h1 class="display-6">Trivia Game</h1>
-    <div class="text-left">
+    <div>
       <div class="row mt-5">
         <div class="col">
           <p>Category: {{ category }}</p>
         </div>
-        <div class="col">
+        <div class="col text-center">
           <p>
             <i class="fa-solid fa-stopwatch fa-beat" style="color: #b84ce7"></i>
             {{ timeRemaining }}
@@ -17,7 +17,7 @@
         <div class="col">
           <p>Difficulty: {{ difficulty }}</p>
         </div>
-        <div class="col">
+        <div class="col text-center">
           <p>Points: {{ points }}</p>
         </div>
       </div>
@@ -25,7 +25,19 @@
   </div>
 
   <div class="card border-light shadow p-4 mt-5">
-    <img class="card-img-top" src="holder.js/100px180/" alt="" />
+    <div class="progress w-100">
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated"
+        role="progressbar"
+        style="width: 100%"
+        aria-valuenow="20"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [ngStyle]="{ width: currentQuestionIndex / questions.length * 100 + '%' }"
+      >
+        {{ currentQuestionIndex + 1 }} / {{ questions.length}}
+      </div>
+    </div>
     <div class="card-body m-4">
       <div class="card-title" *ngIf="currentQuestion">
         <h3>Question {{ currentQuestionIndex + 1 }}</h3>
