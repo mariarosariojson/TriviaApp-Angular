@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import axios from 'axios';
 
 @Component({
@@ -94,6 +93,7 @@ export class TriviaGameComponent implements OnInit {
 
     if (index === this.currentQuestion.correctIndex) {
       this.correctAnswer = answer;
+      this.points++;
     }
   }
 
@@ -116,7 +116,7 @@ export class TriviaGameComponent implements OnInit {
   }
 
   finishGame() {
-    sessionStorage.setItem('points', this.correctAnswer.toString());
+    sessionStorage.setItem('points', this.points.toString());
     clearInterval(this.timer);
     this.router.navigate(['/results'], {
       queryParams: { sessionToken: this.sessionToken },

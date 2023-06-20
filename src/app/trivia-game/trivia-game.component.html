@@ -18,7 +18,7 @@
           <p>Difficulty: {{ difficulty }}</p>
         </div>
         <div class="col">
-          <p>Points: {{ currentQuestion.points }}</p>
+          <p>Points: {{ points }}</p>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
           {{ answer }}
         </button>
       </div>
-      <div *ngIf="selectedAnswer !== ''">
+      <div *ngIf="selectedAnswer !== ''" class="mt-5">
         <p>Your Answer: {{ selectedAnswer }}</p>
         <p>Correct Answer: {{ currentQuestion.correct_answer }}</p>
       </div>
