@@ -1,19 +1,22 @@
-<div class="container mt-5 w-75">
+<div class="container mt-4 w-75">
   <div class="container col-md-12 text-left">
     <h1 class="display-6">Trivia Game</h1>
     <div>
-      <div class="row mt-5">
+      <div class="row mt-5 game-info">
         <div class="col">
           <p>Category: {{ category }}</p>
         </div>
         <div class="col text-center">
           <p>
-            <i class="fa-solid fa-stopwatch fa-beat" style="color: #b84ce7"></i>
+            <i
+              class="fa-solid fa-stopwatch fa-beat"
+              style="color: blueviolet"
+            ></i>
             {{ timeRemaining }}
           </p>
         </div>
       </div>
-      <div class="row">
+      <div class="row game-stats">
         <div class="col">
           <p>Difficulty: {{ difficulty }}</p>
         </div>
@@ -24,25 +27,24 @@
     </div>
   </div>
 
-  <div class="card border-light shadow p-4 mt-5">
-    <div class="progress w-100">
+  <div class="card border-light shadow-lg p-4 mt-4 rounded-4">
+    <div class="progress shadow">
       <div
-        class="progress-bar progress-bar-striped progress-bar-animated"
+        class="progress-bar progress-bar-animated bg-light progress-bar-striped"
         role="progressbar"
-        style="width: 100%"
-        aria-valuenow="20"
+        aria-valuenow="0"
         aria-valuemin="0"
         aria-valuemax="100"
-        [ngStyle]="{ width: currentQuestionIndex / questions.length * 100 + '%' }"
-      >
-        {{ currentQuestionIndex + 1 }} / {{ questions.length}}
-      </div>
+        [ngStyle]="{
+          width: (currentQuestionIndex / questions.length) * 100 + '%'
+        }"
+      ></div>
     </div>
     <div class="card-body m-4">
       <div class="card-title" *ngIf="currentQuestion">
         <h3>Question {{ currentQuestionIndex + 1 }}</h3>
       </div>
-      <p class="card-text">{{ currentQuestion.question }}</p>
+      <p class="card-text pb-5 mt-4">{{ currentQuestion.question }}</p>
       <div class="d-grid gap-3 col-8 mx-auto mt-4">
         <button
           *ngFor="let answer of currentQuestion.answers; let i = index"
