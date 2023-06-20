@@ -3,6 +3,11 @@
   background-color: blueviolet;
   color: whitesmoke;
 }
+.header-primary {
+  font-family: "Monoton", cursive;
+  font-size: 3rem;
+  color: blueviolet;
+}
 .correct-answer {
   color: rgb(59, 227, 59);
   font-weight: bold;
@@ -22,7 +27,7 @@
 }
 .card-text {
   font-size: 1.3rem;
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: 0.5px;
   text-align: center;
 }

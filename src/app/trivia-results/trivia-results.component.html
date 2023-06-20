@@ -1,16 +1,16 @@
-<div class="container mt-5 text-center">
-  <h2 class="display-6">Your results</h2>
+<div class="container text-center">
+  <h2 class="header-primary">Your Results</h2>
 
   <div *ngIf="points !== undefined">
-    <p>Your Score: {{ points }} / 7</p>
-    <h4 class="mt-5">Correct Answers:</h4>
-    <div>
-      <p *ngFor=" let answer of correctAnswers">{{ answer }}</p>
+    <p class="results-points">Your score: {{ points }} / 7</p>
+    <div class="results-answers">
+      <h3 class="text-left">Your correct answers:</h3>
+      <p *ngFor="let answer of correctAnswers">{{ answer }}</p>
     </div>
 
     <Button
       (click)="backToStart()"
-      class="btn btn-outline-secondary btn-lg mt-3"
+      class="btn btn-outline-secondary btn-lg mt-5"
       >Back to Start</Button
     >
   </div>
