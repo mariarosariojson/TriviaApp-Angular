@@ -38,7 +38,7 @@
           (click)="selectAnswer(answer, i)"
           [ngClass]="{
             'btn-light': selectedAnswer !== answer,
-            'btn-success': correctAnswer === answer
+            'btn-success': correctAnswers.includes(answer),
           }"
           class="btn p-3"
         >
@@ -47,18 +47,15 @@
       </div>
       <div *ngIf="selectedAnswer !== ''" class="mt-5">
         <p>Your Answer: {{ selectedAnswer }}</p>
-        <p>Correct Answer: {{ currentQuestion.correct_answer }}</p>
+        <p>
+          Correct Answer:
+          <span class="correct-answer">{{
+            currentQuestion.correct_answer
+          }}</span>
+        </p>
       </div>
     </div>
   </div>
-
-  <button
-    (click)="nextQuestion()"
-    [disabled]="selectedAnswer === ''"
-    class="mt-4 btn btn-primary"
-  >
-    Next
-  </button>
 </div>
 
 <div *ngIf="!currentQuestion">

@@ -3,10 +3,11 @@
 
   <div *ngIf="points !== undefined">
     <p>Your Score: {{ points }} / 7</p>
-    <h4 class="mt-5">Correct Answers:{{ correctAnswers }}</h4>
-    <ul>
-      <li *ngFor="let answer of correctAnswers">{{ answer }}</li>
-    </ul>
+    <h4 class="mt-5">Correct Answers:</h4>
+    <div>
+      <p *ngFor=" let answer of correctAnswers">{{ answer }}</p>
+    </div>
+
     <Button
       (click)="backToStart()"
       class="btn btn-outline-secondary btn-lg mt-3"
