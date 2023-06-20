@@ -4,11 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import axios from 'axios';
 
-interface Category {
-  id: number;
-  name: string;
-}
-
 @Component({
   selector: 'app-trivia-game',
   templateUrl: './trivia-game.component.html',

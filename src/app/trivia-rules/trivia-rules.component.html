@@ -22,7 +22,7 @@
         class="form-control"
         required
       >
-        <option *ngFor="let category of categories" [value]="category.id">
+        <option *ngFor="let category of categories" [value]="category.name">
           {{ category.name }}
         </option>
       </select>
