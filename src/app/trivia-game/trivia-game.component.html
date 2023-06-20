@@ -1,28 +1,25 @@
 <div class="container mt-5 w-75">
   <div class="container col-md-12 text-left">
-    <h1 class="header-primary">Trivia Game</h1>
-    <div>
-      <div class="row mt-5 game-info">
-        <div class="col">
-          <p>Category: {{ category }}</p>
-        </div>
-        <div class="col text-center">
-          <p>
-            <i
-              class="fa-solid fa-stopwatch fa-beat"
-              style="color: blueviolet"
-            ></i>
-            {{ timeRemaining }}
-          </p>
-        </div>
+    <div class="row mt-5 game-info">
+      <div class="col">
+        <p>Category: {{ category }}</p>
       </div>
-      <div class="row game-stats">
-        <div class="col">
-          <p>Difficulty: {{ difficulty }}</p>
-        </div>
-        <div class="col text-center">
-          <p>Points: {{ points }}</p>
-        </div>
+      <div class="col text-center">
+        <p>
+          <i
+            class="fa-solid fa-stopwatch fa-beat"
+            style="color: blueviolet"
+          ></i>
+          {{ timeRemaining }}
+        </p>
+      </div>
+    </div>
+    <div class="row game-stats">
+      <div class="col">
+        <p>Difficulty: {{ difficulty }}</p>
+      </div>
+      <div class="col text-center">
+        <p>Points: {{ points }}</p>
       </div>
     </div>
   </div>

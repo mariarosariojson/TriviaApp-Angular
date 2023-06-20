@@ -1,0 +1,12 @@
+.header-primary {
+  font-family: "Monoton", cursive;
+  font-size: 1.2rem;
+  color: blueviolet;
+  width: fit-content;
+}
+.header-secondary {
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  color: rgb(75, 75, 75);
+  width: fit-content;
+}
