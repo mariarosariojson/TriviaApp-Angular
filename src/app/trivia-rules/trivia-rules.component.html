@@ -3,20 +3,19 @@
     <span class="header-primary">Trivia</span>
     <span class="header-secondary">rules</span>
     <ol class="mt-3">
-      <li>Pick a category</li>
-      <li>Pick a difficulty</li>
-      <li>Click 'Start game'</li>
-      <li>Click the (or what you think is the) right answer</li>
-      <li>You will be told if you are right or wrong.</li>
-      <li>Click next to go to the next question</li>
-      <li>You will have 31 seconds to complete each question</li>
+      <li>Select a category and difficulty level.</li>
+      <li>You will be presented with a series of multiple-choice questions.</li>
+      <li>Select the correct answer for each question.</li>
+      <li>There are 7 questions in total.</li>
+      <li>You have 31 seconds to answer each question.</li>
+      <li>You will be shown your results during and at the end of the game.</li>
     </ol>
     <b class="mt-5">You got this!</b>
   </div>
   <form (ngSubmit)="startGame()" class="mt-5 text-center" #gameForm="ngForm">
     <div>
       <label for="category" class="m-2 form-label"
-        >Pick your category here,</label
+        >Select your category here,</label
       >
       <select
         id="category"

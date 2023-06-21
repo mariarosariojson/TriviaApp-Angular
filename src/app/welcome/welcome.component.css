@@ -15,6 +15,7 @@
   font-family: "Monoton", cursive;
   font-size: 10rem;
   color: blueviolet;
+  text-shadow: 0.1rem 0.1rem 0.2rem blueviolet;
 }
 .container p {
   font-family: "Raleway", sans-serif;

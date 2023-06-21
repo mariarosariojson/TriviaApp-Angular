@@ -14,11 +14,13 @@
   font-family: "Monoton", cursive;
   font-size: 5rem;
   color: blueviolet;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2);
 }
 .results-points {
   font-family: "Raleway", sans-serif;
   font-size: 3rem;
-  color: rgb(75, 75, 75);
+  font-weight: 900;
+  color: rgb(105, 105, 105);
 }
 .answers-container {
   display: flex;
@@ -45,5 +47,5 @@
   margin-left: 5rem;
 }
 i {
-  color: rgb(225, 191, 0);
+  color: rgba(255, 220, 19, 0.49);
 }
