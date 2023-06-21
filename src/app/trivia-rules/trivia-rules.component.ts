@@ -44,7 +44,6 @@ export class TriviaRulesComponent implements OnInit {
       category: this.selectedCategory,
       difficulty: this.selectedDifficulty,
     };
-    console.log(this.selectedCategory);
     this.router.navigate(['/game'], { queryParams });
   }
 }

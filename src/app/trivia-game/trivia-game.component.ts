@@ -34,7 +34,7 @@ export class TriviaGameComponent implements OnInit {
       this.category = params['category'];
       this.difficulty = params['difficulty'];
       this.sessionToken = params['sessionToken'];
-      this.selectedCategory = this.category;
+      this.selectedCategory = params['selectedCategory'];
       this.startGame();
     });
   }
@@ -69,11 +69,11 @@ export class TriviaGameComponent implements OnInit {
   fetchQuestions() {
     let url = `https://opentdb.com/api.php?amount=7&type=multiple`;
 
-    if (this.selectedCategory && this.selectedCategory > 0) {
-      const categoryParam = this.selectedCategory.toString();
+    if (this.selectedCategory > 0) {
+      const categoryParam = this.selectedCategory;
       url += `&category=${categoryParam}`;
     }
-    console.log(this.selectedCategory);
+    console.log(this.category);
 
     this.http
       .get<any>(url)
