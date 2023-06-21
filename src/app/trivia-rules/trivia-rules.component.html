@@ -1,4 +1,4 @@
-<div class="container mt-5 col-md-5 p-4">
+<div class="container mt-5 col-md-6 p-4 text-left">
   <div>
     <span class="header-primary">Trivia</span>
     <span class="header-secondary">rules</span>
@@ -13,11 +13,7 @@
     </ol>
     <b class="mt-5">You got this!</b>
   </div>
-  <form
-    (ngSubmit)="startGame()"
-    class="mt-5 w-75 text-center"
-    #gameForm="ngForm"
-  >
+  <form (ngSubmit)="startGame()" class="mt-5 text-center" #gameForm="ngForm">
     <div>
       <label for="category" class="m-2 form-label"
         >Pick your category here,</label
@@ -25,11 +21,13 @@
       <select
         id="category"
         [(ngModel)]="selectedCategory"
+        (change)="onCategoryChange(categoryInput.value)"
         name="category"
         class="form-select"
         required
         #categoryInput="ngModel"
       >
+        <option value="O" disabled selected>Select a category</option>
         <option *ngFor="let category of categories" [value]="category.name">
           {{ category.name }}
         </option>
@@ -53,6 +51,7 @@
         required
         #difficultyInput="ngModel"
       >
+        <option value="O" disabled selected>Select a difficulty</option>
         <option value="Easy">Easy</option>
         <option value="Medium">Medium</option>
         <option value="Hard">Hard</option>

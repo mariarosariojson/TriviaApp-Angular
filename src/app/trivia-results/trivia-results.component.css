@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   font-family: "Raleway", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.3px;
   justify-content: center;
@@ -20,12 +20,30 @@
   font-size: 3rem;
   color: rgb(75, 75, 75);
 }
-.results-answers h3 {
+.answers-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-top: 7rem;
+}
+.correct-answers h3,
+.incorrect-answers h3 {
   font-family: "Raleway", sans-serif;
   font-size: 1.3rem;
   font-weight: 900;
-  color: blueviolet;
   letter-spacing: 0.3px;
-  margin-top: 5rem;
 }
-
+.incorrect-answers h3,
+.incorrect-answers p {
+  color: rgb(139, 139, 139);
+}
+.correct-answers {
+  margin-right: 5rem;
+}
+.incorrect-answers {
+  margin-left: 5rem;
+}
+i {
+  color: rgb(225, 191, 0);
+}

@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import axios from 'axios';
-import { OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 interface Category {
   id: number;
@@ -15,31 +14,37 @@ interface Category {
 })
 export class TriviaRulesComponent implements OnInit {
   categories: Category[] = [];
-  selectedCategory: string = '';
+  selectedCategory: number = 0;
   selectedDifficulty: string = '';
+
+  constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit() {
     this.getCategories();
   }
 
   getCategories() {
-    axios
-      .get('https://opentdb.com/api_category.php')
-      .then((response) => {
-        this.categories = response.data.trivia_categories;
-      })
-      .catch((error) => {
+    this.http.get<any>('https://opentdb.com/api_category.php').subscribe(
+      (response) => {
+        this.categories = response.trivia_categories;
+        console.log(this.categories);
+      },
+      (error) => {
         console.error(error);
-      });
+      }
+    );
   }
-
-  constructor(private router: Router) {}
+  onCategoryChange(categoryId: number) {
+    this.selectedCategory = categoryId;
+    console.log(this.selectedCategory);
+  }
 
   startGame() {
     const queryParams = {
       category: this.selectedCategory,
       difficulty: this.selectedDifficulty,
     };
+    console.log(this.selectedCategory);
     this.router.navigate(['/game'], { queryParams });
   }
 }

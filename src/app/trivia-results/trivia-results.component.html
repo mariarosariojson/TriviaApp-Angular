@@ -2,16 +2,26 @@
   <h2 class="header-primary">Your Results</h2>
 
   <div *ngIf="points !== undefined">
-    <p class="results-points">Your score: {{ points }} / 7</p>
-    <div class="results-answers">
-      <h3 class="text-left">Your correct answers:</h3>
-      <p *ngFor="let answer of correctAnswers">{{ answer }}</p>
-    </div>
+    <p class="results-points">
+      Points: {{ points }} / 7 <i class="fas fa-medal fa-2x fa-fw"></i>
+    </p>
 
-    <Button
-      (click)="backToStart()"
-      class="btn btn-outline-secondary btn-trivia btn-lg mt-5"
-      >Back to Start</Button
-    >
+    <div class="answers-container">
+      <div class="correct-answers">
+        <h3>Correct answers:</h3>
+        <p *ngFor="let answer of correctAnswers">{{ answer }}</p>
+      </div>
+      <div class="incorrect-answers">
+        <h3 *ngIf="incorrectAnswers !== undefined">Incorrect answers:</h3>
+        <p *ngFor="let answer of incorrectAnswers">{{ answer }}</p>
+      </div>
+    </div>
   </div>
+
+  <button
+    (click)="backToStart()"
+    class="btn btn-outline-secondary btn-trivia btn-lg mt-5"
+  >
+    Back to Start
+  </button>
 </div>

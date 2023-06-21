@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import axios from 'axios';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-trivia-game',
@@ -9,7 +9,8 @@ import axios from 'axios';
   styleUrls: ['./trivia-game.component.css'],
 })
 export class TriviaGameComponent implements OnInit {
-  category: string = '';
+  category: number = 0;
+  selectedCategory: number = 0;
   difficulty: string = '';
   sessionToken: string = '';
   questions: any[] = [];
@@ -19,6 +20,7 @@ export class TriviaGameComponent implements OnInit {
   timer: any = null;
   timeRemaining: number = 31;
   correctAnswers: string[] = [];
+  incorrectAnswers: string[] = [];
   points: number = 0;
 
   constructor(
@@ -32,6 +34,7 @@ export class TriviaGameComponent implements OnInit {
       this.category = params['category'];
       this.difficulty = params['difficulty'];
       this.sessionToken = params['sessionToken'];
+      this.selectedCategory = this.category;
       this.startGame();
     });
   }
@@ -64,33 +67,45 @@ export class TriviaGameComponent implements OnInit {
   }
 
   fetchQuestions() {
-    const url = `https://opentdb.com/api.php?amount=7&type=multiple`;
+    let url = `https://opentdb.com/api.php?amount=7&type=multiple`;
 
-    axios
-      .get(url)
-      .then((response) => {
-        this.questions = response.data.results;
+    if (this.selectedCategory && this.selectedCategory > 0) {
+      const categoryParam = this.selectedCategory.toString();
+      url += `&category=${categoryParam}`;
+    }
+    console.log(this.selectedCategory);
 
-        this.questions.forEach((question) => {
-          const allAnswers = [
-            ...question.incorrect_answers,
-            question.correct_answer,
-          ];
-          const shuffledAnswers = this.shuffleArray<string>(allAnswers);
+    this.http
+      .get<any>(url)
+      .pipe(
+        map((response) => {
+          this.questions = response.results;
+          console.log(this.questions);
 
-          question.answers = shuffledAnswers.map((answer) => answer);
-          question.correctIndex = shuffledAnswers.indexOf(
-            question.correct_answer
-          );
-          question.points = 1;
-        });
+          this.questions.forEach((question) => {
+            const allAnswers = [
+              ...question.incorrect_answers,
+              question.correct_answer,
+            ];
+            const shuffledAnswers = this.shuffleArray<string>(allAnswers);
 
-        this.currentQuestion = this.questions[this.currentQuestionIndex];
-        this.startTimer();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+            question.answers = shuffledAnswers.map((answer) => answer);
+            question.correctIndex = shuffledAnswers.indexOf(
+              question.correct_answer
+            );
+            question.points = 1;
+          });
+
+          this.currentQuestion = this.questions[this.currentQuestionIndex];
+          this.startTimer();
+        })
+      )
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.error(error);
+        }
+      );
   }
 
   startTimer() {
@@ -108,13 +123,16 @@ export class TriviaGameComponent implements OnInit {
     if (index === this.currentQuestion.correctIndex) {
       this.correctAnswers.push(this.selectedAnswer.toString());
       this.points++;
+    } else {
+      this.incorrectAnswers.push(this.selectedAnswer.toString());
     }
+
     setTimeout(() => {
       this.nextQuestion();
     }, 1000);
     console.log(this.correctAnswers);
   }
-  
+
   nextQuestion() {
     this.currentQuestionIndex++;
     if (this.currentQuestionIndex < this.questions.length) {
@@ -144,6 +162,11 @@ export class TriviaGameComponent implements OnInit {
       'correctAnswers',
       JSON.stringify(this.correctAnswers)
     );
+    sessionStorage.setItem(
+      'incorrectAnswers',
+      JSON.stringify(this.incorrectAnswers)
+    );
+
     clearInterval(this.timer);
     this.router.navigate(['/results'], {
       queryParams: { sessionToken: this.sessionToken },

@@ -1,5 +1,5 @@
 <div class="container mt-5 w-75">
-  <div class="container col-md-12 text-left">
+  <div class="container col-md-10 text-left">
     <div class="row mt-5 game-info">
       <div class="col">
         <p>Category: {{ category }}</p>
@@ -23,7 +23,6 @@
       </div>
     </div>
   </div>
-
   <div class="card border-light shadow-lg p-4 mt-4 rounded-4">
     <div class="progress shadow">
       <div
@@ -42,7 +41,7 @@
         <h3>Question {{ currentQuestionIndex + 1 }}</h3>
       </div>
       <p class="card-text pb-5 mt-4">{{ currentQuestion.question }}</p>
-      <div class="d-grid gap-3 col-8 mx-auto mt-4">
+      <div class="d-grid gap-3 col-12 mx-auto mt-4">
         <button
           *ngFor="let answer of currentQuestion.answers; let i = index"
           [disabled]="selectedAnswer !== ''"

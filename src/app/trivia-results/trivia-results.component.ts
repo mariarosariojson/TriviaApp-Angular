@@ -11,6 +11,7 @@ export class TriviaResultsComponent implements OnInit {
   sessionToken: string = '';
   points: number = 0;
   correctAnswers: string[] = [];
+  incorrectAnswers: string[] = [];
 
   constructor(
     private http: HttpClient,
@@ -24,6 +25,9 @@ export class TriviaResultsComponent implements OnInit {
       this.points = parseInt(sessionStorage.getItem('points') || '0');
       this.correctAnswers = JSON.parse(
         sessionStorage.getItem('correctAnswers') || '[]'
+      );
+      this.incorrectAnswers = JSON.parse(
+        sessionStorage.getItem('incorrectAnswers') || '[]'
       );
     });
   }
