@@ -17,7 +17,10 @@ export class TriviaRulesComponent implements OnInit {
   selectedCategory: number = 0;
   selectedDifficulty: string = '';
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+  ) {}
 
   ngOnInit() {
     this.getCategories();

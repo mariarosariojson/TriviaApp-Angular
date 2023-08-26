@@ -69,7 +69,7 @@ export class TriviaGameComponent implements OnInit {
   fetchQuestions() {
     let url = `https://opentdb.com/api.php?amount=7&type=multiple`;
 
-    if (this.selectedCategory > 0) {
+    if (this.selectedCategory) {
       const categoryParam = this.selectedCategory;
       url += `&category=${categoryParam}`;
     }
